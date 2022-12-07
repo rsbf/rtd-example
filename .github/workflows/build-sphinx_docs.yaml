@@ -17,4 +17,5 @@ jobs:
       
     - name: Run Sphinx doctest
       run: |
+        pip install sphinx
         make -C docs doctest
