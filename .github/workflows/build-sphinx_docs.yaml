@@ -1,13 +1,17 @@
-name: "Pull Request Docs Check"
-on: 
-- pull_request
-- workflow_dispatch
+name: Python package
+
+on:
+  workflow_dispatch:
+
 
 jobs:
-  docs:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9"]
     steps:
-    - uses: actions/checkout@v1
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
+    - name: Run Sphinx doctest
+      run: |
+        make -C docs doctest
